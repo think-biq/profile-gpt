@@ -5,16 +5,22 @@ RUN apt-get update
 RUN apt-get install -y make
 RUN python3 -m pip install -U pip
 
-# python-requirements
+# Prepare run env
 RUN mkdir -p /app
-COPY requirements.txt /app
-RUN python3 -m pip install -r /app/requirements.txt
 
-# web
-COPY src/ /app/src
+
+# Copy necessary files
+COPY etc /app/etc
+COPY images /app/images
+COPY share /app/share
+COPY dashboard.py /app
+COPY requirements.txt /app
 RUN ls -lav .
 
-# app
+# Requirements
+RUN python3 -m pip install -r /app/requirements.txt
+
+# Run
 WORKDIR /app
 RUN ls -lav
 CMD streamlit run dashboard.py
