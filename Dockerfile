@@ -10,9 +10,8 @@ RUN mkdir -p /app
 
 
 # Copy necessary files
-COPY etc /app/etc
 COPY images /app/images
-COPY share /app/share
+COPY utils /app/utils
 COPY dashboard.py /app
 COPY requirements.txt /app
 RUN ls -lav .
